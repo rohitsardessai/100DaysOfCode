@@ -1,4 +1,5 @@
 #include "vector.h"
+#include <string.h>
 
 vector_t *new_vector(int capacity)
 {
@@ -23,15 +24,15 @@ vector_t *new_vector(int capacity)
 
 int vector_insert(vector_t *vector, int index, int value)
 {
-    if (index < 0) {
+    if (index < 0 || index >= vector->size) {
         return -1;
     }
-    if (index >= vector->capacity) {
-        int new_capacity = vector->capacity * sizeof(int) * 2;
-        vector->data = realloc(vector->data, new_capacity);
-        vector->capacity = new_capacity;
-    }
+
+    vector_resize_check(vector, (vector->size + 1));
+
+    memmove(&vector->data[index + 1], &vector->data[index], ((vector->size - index) * sizeof(int)));
     vector->data[index] = value;
+    vector->size += 1;
     return 0;
 }
 

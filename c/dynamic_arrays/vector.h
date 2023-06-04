@@ -22,7 +22,7 @@ typedef struct {
 vector_t *new_vector(int capacity);
 
 /**
- * @brief Inserts an element at a particular index in the array.
+ * @brief Inserts an element at a particular index in the array by moving all the elements from that index onwards by 1 position.
  *
  * @param vector Pointer to the vector or dynamic array data structure.
  * @param index The index at which the value must be added.
