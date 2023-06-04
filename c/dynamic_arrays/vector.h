@@ -47,4 +47,36 @@ int vector_at(vector_t *vector, int index);
  */
 void vector_destroy(vector_t *vector);
 
+/**
+ * @brief Returns the total capacity of the vector
+ *
+ * @param vector Pointer to the vector or dynamic array data structure.
+ * @return The capacity of the array
+ */
+int vector_capacity(vector_t *vector);
+
+/**
+ * @brief Appends a value at the end of the array.
+ *
+ * @param vector Pointer to the vector or dynamic array data structure.
+ * @param value The value to be inserted
+ */
+void vector_push(vector_t *vector, int value);
+
+/**
+ * @brief Checks if the size of the array needs to be increased and increases it accordingly.
+ *
+ * @param vector Pointer to the vector or dynamic array data structure.
+ * @param required_capacity The new required capacity of the array.
+ */
+void vector_resize_check(vector_t *vector, int required_capacity);
+
+/**
+ * @brief Returns the size of the array, i.e. the number of elements that exist in the array
+ *
+ * @param vector Pointer to the vector or dynamic array data structure.
+ * @return The size of the array.
+ */
+int vector_size(vector_t *vector);
+
 #endif

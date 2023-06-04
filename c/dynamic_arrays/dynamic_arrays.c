@@ -16,7 +16,13 @@ int main()
 {
     vector_t *arr = new_vector(5);
     for (int i = 0; i < 15; i++) {
-        vector_insert(arr, i, i);
+        vector_push(arr, i);
+        printf("%d\n", vector_at(arr, i));
+    }
+    vector_insert(arr, 5, 100);
+
+    printf("\n\n");
+    for (int i = 0; i < vector_size(arr); i++) {
         printf("%d\n", vector_at(arr, i));
     }
 

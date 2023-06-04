@@ -47,3 +47,29 @@ void vector_destroy(vector_t *vector)
     free(vector->data);
     free(vector);
 }
+
+int vector_capacity(vector_t *vector)
+{
+    return vector->capacity;
+}
+
+void vector_push(vector_t *vector, int value)
+{
+    vector_resize_check(vector, (vector->size + 1));
+    vector->data[vector->size] = value;
+    vector->size += 1;
+}
+
+void vector_resize_check(vector_t *vector, int required_capacity)
+{
+    if (required_capacity > vector->capacity) {
+        int new_capacity = vector->capacity * sizeof(int) * 2;
+        vector->data = realloc(vector->data, new_capacity);
+        vector->capacity = new_capacity;
+    }
+}
+
+int vector_size(vector_t *vector)
+{
+    return vector->size;
+}
