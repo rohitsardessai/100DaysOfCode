@@ -45,6 +45,6 @@ int vector_at(vector_t *vector, int index);
  *
  * @param vector Pointer to the vector or dynamic array data structure.
  */
-void vector_desroy(vector_t *vector);
+void vector_destroy(vector_t *vector);
 
 #endif

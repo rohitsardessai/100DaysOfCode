@@ -20,7 +20,7 @@ int main()
         printf("%d\n", vector_at(arr, i));
     }
 
-    vector_desroy(arr);
+    vector_destroy(arr);
 
     return 0;
 }

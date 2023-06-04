@@ -41,7 +41,7 @@ int vector_at(vector_t *vector, int index)
     return value;
 }
 
-void vector_desroy(vector_t *vector)
+void vector_destroy(vector_t *vector)
 {
     free(vector->data);
     free(vector);
