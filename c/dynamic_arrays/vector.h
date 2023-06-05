@@ -64,9 +64,11 @@ int vector_capacity(vector_t *vector);
 void vector_push(vector_t *vector, int value);
 
 /**
- * @brief Checks if the size of the array needs to be increased and increases it accordingly.
+ * @brief Checks if the capacity of the array needs to be increased or decreased and does so accordingly.
+ *          The capacity of the array is doubled if the used size exceeds the capacity. The capacity is halved if the used size is less than
+ *          1/4 of the capacity.
  *
- * @param vector Pointer to the vector or dynamic array data structure.
+ * @param vector Pointer to the vector data structure.
  * @param required_capacity The new required capacity of the array.
  */
 void vector_resize_check(vector_t *vector, int required_capacity);
