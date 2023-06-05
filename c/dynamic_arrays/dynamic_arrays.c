@@ -25,6 +25,21 @@ int main()
     for (int i = 0; i < vector_size(arr); i++) {
         printf("%d\n", vector_at(arr, i));
     }
+    printf("\n");
+
+    printf("Searching for %d. Response: %d\n", 9, vector_find(arr, 9));
+    printf("Searching for %d. Response: %d\n", 110, vector_find(arr, 110));
+
+    printf("Vector size before deleting an element: %d\n", vector_size(arr));
+    vector_delete(arr, 11);
+    printf("Vector size after deleting an element: %d\n", vector_size(arr));
+
+    vector_remove(arr, 6);
+
+    printf("\n");
+    for (int i = vector_size(arr); i > 0; i--) {
+        printf("Value: %d, size: %d\n", vector_pop(arr), vector_size(arr));
+    }
 
     vector_destroy(arr);
 

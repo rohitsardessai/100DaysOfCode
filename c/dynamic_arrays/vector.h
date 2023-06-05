@@ -1,7 +1,9 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <stdbool.h>
 #include <stdlib.h>
+
 /**
  * @brief Data structure to hold dynamic array. Capacity is the number of elements that the array can hold.
  *         Size is the number of elements currently in the array. *data is a pointer to the array
@@ -80,5 +82,48 @@ void vector_resize_check(vector_t *vector, int required_capacity);
  * @return The size of the array.
  */
 int vector_size(vector_t *vector);
+
+/**
+ * @brief Cheks if the array is empty
+ *
+ * @param vector Pointer to the vector data structure.
+ * @return True if the array is empty
+ * @return False if the array is not empty
+ */
+bool vector_is_empty(vector_t *vector);
+
+/**
+ * @brief Removes the last element in the array and returns its value
+ *
+ * @param vector Pointer to the vector data structure.
+ * @return The value of the last element that has been removed
+ */
+int vector_pop(vector_t *vector);
+
+/**
+ * @brief Deletes the element at the specified index. All following array elements are moved one step to the left.
+ *
+ * @param vector Pointer to the vector data structure.
+ * @param index Index of the element to be deleted
+ * @return Returns -1 if there is an error and 0 if successful
+ */
+int vector_delete(vector_t *vector, int index);
+
+/**
+ * @brief Removes the specified value from the array even if it appears in multiple places.
+ *
+ * @param vector Pointer to the vector data structure.
+ * @param value Value to be removed
+ */
+void vector_remove(vector_t *vector, int value);
+
+/**
+ * @brief Searches the array and returns the first index at which the value is found. It returns -1 if the value is not found.
+ *
+ * @param vector Pointer to the vector data structure.
+ * @param value Value to look for
+ * @return Returns the first index at which the value is found. Returns -1 if the value is not found.
+ */
+int vector_find(vector_t *vector, int value);
 
 #endif

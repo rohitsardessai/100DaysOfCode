@@ -84,3 +84,52 @@ int vector_size(vector_t *vector)
 {
     return vector->size;
 }
+
+bool vector_is_empty(vector_t *vector)
+{
+    if (vector->size == 0) {
+        return true;
+    }
+    return false;
+}
+
+int vector_pop(vector_t *vector)
+{
+    int value = vector->data[vector->size - 1];
+    vector->size -= 1;
+    vector_resize_check(vector, vector->size);
+    return value;
+}
+
+int vector_delete(vector_t *vector, int index)
+{
+    if (index < 0 || index >= vector->size) {
+        return -1;
+    }
+
+    memmove(&vector->data[index], &vector->data[index + 1], ((vector->size - index) * sizeof(int)));
+    vector->size -= 1;
+    vector_resize_check(vector, (vector->size));
+
+    return 0;
+}
+
+void vector_remove(vector_t *vector, int value)
+{
+    for (int i = 0; i < vector->size; i++) {
+        if (vector->data[i] == value) {
+            vector_delete(vector, i);
+            i--;
+        }
+    }
+}
+
+int vector_find(vector_t *vector, int value)
+{
+    for (int i = 0; i < vector->size; i++) {
+        if (vector->data[i] == value) {
+            return i;
+        }
+    }
+    return -1;
+}
