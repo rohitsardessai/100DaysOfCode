@@ -11,7 +11,7 @@ void print_list(node_t *list)
 {
     printf("\nList:\n");
     for (node_t *tmp = list; tmp != NULL; tmp = tmp->next) {
-        printf("%i\n", tmp->data);
+        printf("%i ", tmp->data);
     }
     printf("\n");
 }
