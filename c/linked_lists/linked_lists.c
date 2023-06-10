@@ -78,6 +78,59 @@ int list_size(node_t **head)
     return size;
 }
 
+void list_insert(node_t **head, int index, int value)
+{
+    node_t *n = new_node();
+    n->data = value;
+
+    node_t *tmp = *head;
+
+    if (index == 0) {
+        list_push_front(head, value);
+        return;
+    }
+
+    for (int i = 0; i <= index; i++) {
+        if (i == index - 1) {
+            break;
+        }
+        if (tmp->next == NULL) {
+            exit(EXIT_FAILURE);
+        }
+        tmp = tmp->next;
+    }
+
+    n->next = tmp->next;
+    tmp->next = n;
+}
+
+void list_erase(node_t **head, int index)
+{
+    node_t *tmp = *head;
+
+    if (index == 0) {
+        *head = tmp->next;
+        return;
+    }
+
+    for (int i = 0; i <= index; i++) {
+        if (tmp->next == NULL) {
+            exit(EXIT_FAILURE);
+        }
+        if (i == index - 1) {
+            node_t *node_to_delete = tmp->next;
+            if (tmp->next->next != NULL) {
+                tmp->next = tmp->next->next;
+            } else {
+                tmp->next == NULL;
+            }
+            free(node_to_delete);
+            break;
+        }
+        tmp = tmp->next;
+    }
+}
+
 void list_destroy(node_t *list)
 {
     while (list != NULL) {

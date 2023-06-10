@@ -65,6 +65,23 @@ int list_value_at(node_t **head, int index);
 int list_size(node_t **head);
 
 /**
+ * @brief Inserts a node at the given index in the list
+ *
+ * @param head Pointer to the linked list head pointer
+ * @param index Index at which to insert the new node
+ * @param value Value to be inserted
+ */
+void list_insert(node_t **head, int index, int value);
+
+/**
+ * @brief Deletes the node at the given index
+ *
+ * @param head Pointer to the linked list head pointer
+ * @param index Index of the node to be deleted
+ */
+void list_erase(node_t **head, int index);
+
+/**
  * @brief Frees the memory used by the linked list
  *
  * @param list Pointer to the linked list head

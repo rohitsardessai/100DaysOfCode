@@ -36,6 +36,12 @@ int main()
 
     list_push_back(&list, 100);
 
+    list_insert(&list, 4, 22);
+    list_insert(&list, 0, 21);
+    list_insert(&list, 3, 23);
+
+    print_list(list);
+    list_erase(&list, 0);
     print_list(list);
 
     printf("Which index would you like to check?\n");
