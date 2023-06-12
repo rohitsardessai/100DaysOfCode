@@ -28,11 +28,39 @@ void print_list(node_t *list)
     }
     printf("\n");
 }
+
+/**
+ * @brief Print the linked list in reverse order
+ *
+ * @param list Pointer to the linked list head
+ */
+void print_list_reverse(node_t *list)
+{
+    printf("\nList in reverse:\n");
+    for (node_t *tmp = list->prev; tmp != NULL; tmp = tmp->prev) {
+        printf("%i ", tmp->value);
+        if (tmp == list) {
+            break;
+        }
     }
     printf("\n");
 }
 
 int main()
 {
+    node_t *head = list_init(10);
+
+    print_list(head);
+
+    list_push_front(&head, 20);
+
+    list_push_back(&head, 4);
+    list_push_back(&head, 5);
+    list_push_back(&head, 6);
+
+    print_list(head);
+    print_list_reverse(head);
+
+    list_destroy(head);
     return 0;
 }

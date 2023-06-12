@@ -44,6 +44,18 @@ void list_push_front(node_t **head, int value)
     *head = n;
 }
 
+void list_push_back(node_t **head, int value)
+{
+    node_t *list_head = *head;
+    node_t *n = new_node();
+    n->value = value;
+    n->next = *head;
+    n->prev = list_head->prev;
+
+    list_head->prev->next = n;
+    list_head->prev = n;
+}
+
 void list_destroy(node_t *head)
 {
     node_t *list_head = head;

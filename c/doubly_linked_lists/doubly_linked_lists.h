@@ -50,6 +50,14 @@ node_t *list_init(int value);
 void list_push_front(node_t **head, int value);
 
 /**
+ * @brief Add a node at the end of the list
+ *
+ * @param head Pointer to the linked list head pointer
+ * @param value Value to be inserted
+ */
+void list_push_back(node_t **head, int value);
+
+/**
  * @brief Frees the memory used by the linked list
  *
  * @param list Pointer to the linked list head
