@@ -1,7 +1,7 @@
 /**
  * @file doubly_linked_lists.h
  * @author Rohit Sardessai
- * @brief Header file for doubly linked list implementation in c
+ * @brief Header file for circular doubly linked lists implementation in c
  * @version 0.1
  * @date 2023-06-12
  *
@@ -32,6 +32,14 @@ typedef struct node {
  * @return Returns the newly created node struct
  */
 node_t *new_node();
+
+/**
+ * @brief Initialise a new node and set the value.
+ *
+ * @param value Value to be set to the node
+ * @return Returns the new node
+ */
+node_t *list_init(int value);
 
 /**
  * @brief Add a node at the beginning of the linked list

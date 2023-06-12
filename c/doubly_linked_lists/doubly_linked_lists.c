@@ -1,7 +1,7 @@
 /**
  * @file doubly_linked_lists.c
  * @author Rohit Sardessai
- * @brief Doubly linked list implementation in c
+ * @brief Circular doubly linked list implementation in c
  * @version 0.1
  * @date 2023-06-12
  *
@@ -19,26 +19,40 @@ node_t *new_node()
         printf("\nUnable to allocate memory.\n");
         exit(EXIT_FAILURE);
     }
-    new_node->next = NULL;
-    new_node->prev = NULL;
+    new_node->next = new_node;
+    new_node->prev = new_node;
     return new_node;
+}
+
+node_t *list_init(int value)
+{
+    node_t *n = new_node();
+    n->value = value;
 }
 
 void list_push_front(node_t **head, int value)
 {
+    node_t *list_head = *head;
     node_t *n = new_node();
     n->value = value;
-    n->prev = NULL;
+    n->prev = list_head->prev;
     n->next = *head;
 
+    list_head->prev->next = n;
+
+    list_head->prev = n;
     *head = n;
 }
 
-void list_destroy(node_t *list)
+void list_destroy(node_t *head)
 {
-    while (list != NULL) {
-        node_t *tmp = list->next;
-        free(list);
-        list = tmp;
+    node_t *list_head = head;
+    while (head != NULL) {
+        node_t *tmp = head->next;
+        free(head);
+        head = tmp;
+        if (head == list_head) {
+            break;
+        }
     }
 }

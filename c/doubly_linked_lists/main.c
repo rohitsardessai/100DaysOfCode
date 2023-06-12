@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @author Rohit Sardessai
- * @brief Playing with doubly linked lists in c
+ * @brief Playing with circular doubly linked lists in c
  * @version 0.1
  * @date 2023-06-12
  *
@@ -11,6 +11,7 @@
 
 #include "doubly_linked_lists.h"
 #include <stdio.h>
+
 /**
  * @brief Print the linked list
  *
@@ -21,6 +22,12 @@ void print_list(node_t *list)
     printf("\nList:\n");
     for (node_t *tmp = list; tmp != NULL; tmp = tmp->next) {
         printf("%i ", tmp->value);
+        if (tmp->next == list) {
+            break;
+        }
+    }
+    printf("\n");
+}
     }
     printf("\n");
 }
