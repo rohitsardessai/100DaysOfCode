@@ -58,6 +58,58 @@ void list_push_front(node_t **head, int value);
 void list_push_back(node_t **head, int value);
 
 /**
+ * @brief Returns the number of elements present in the linked list
+ *
+ * @param head Pointer to the list head
+ * @return Returns the number of elements in the linked list
+ */
+int list_size(node_t *head);
+
+/**
+ * @brief Returns the value of the element at the given index in the list
+ *
+ * @param head Pointer to the list head
+ * @param index Index of the element
+ * @return Returns the value at the given index
+ */
+int list_value_at(node_t *head, int index);
+
+/**
+ * @brief Removes the node at the given address. If the head node needs to be removed then the head is set to the next node.
+ *          If there is only one element in the noe then the head pointer is set to NULL.
+ *
+ * @param head Pointer to the linked list head pointer
+ * @param node Pointer to the node to be deleted
+ * @return Returns the value of the node that has been deleted
+ */
+int _list_erase_node_addr(node_t **head, node_t *node);
+
+/**
+ * @brief Remove the first node in the list
+ *
+ * @param head Pointer to the linked list head pointer
+ * @return Returns the value of the node that has been removed
+ */
+int list_pop_front(node_t **head);
+
+/**
+ * @brief Removes the last node in the list
+ *
+ * @param head Pointer to the linked list head pointer
+ * @return Returns the value of the node that has been removed
+ */
+int list_pop_back(node_t **head);
+
+/**
+ * @brief Removes the node at the given index
+ *
+ * @param head Pointer to the linked list head pointer
+ * @param index Index of the node to be removed
+ * @return Returns the value at the node that was removed
+ */
+int list_erase(node_t **head, int index);
+
+/**
  * @brief Frees the memory used by the linked list
  *
  * @param list Pointer to the linked list head

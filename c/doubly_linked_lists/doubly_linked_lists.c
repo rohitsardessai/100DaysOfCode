@@ -56,6 +56,91 @@ void list_push_back(node_t **head, int value)
     list_head->prev = n;
 }
 
+int list_size(node_t *head)
+{
+    node_t *tmp = head;
+    int no_of_nodes = 0;
+    do {
+        if (tmp == NULL) {
+            break;
+        }
+        no_of_nodes++;
+        tmp = tmp->next;
+    } while ((tmp != head));
+
+    return no_of_nodes;
+}
+
+int list_value_at(node_t *head, int index)
+{
+    node_t *tmp = head;
+    int i = 0;
+    do {
+        if (tmp == NULL) {
+            exit(EXIT_FAILURE);
+        }
+        if (i == index) {
+            return tmp->value;
+        }
+        tmp = tmp->next;
+        i++;
+    } while ((tmp != head));
+    exit(EXIT_FAILURE);
+    return -1;
+}
+
+int _list_erase_node_addr(node_t **head, node_t *node)
+{
+    if (node == NULL || *head == NULL) {
+        exit(EXIT_FAILURE);
+    }
+
+    int value = node->value;
+
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+
+    if (node == *head) {
+        if ((*head)->next == *head) {
+            *head == NULL;
+        } else {
+            *head = (*head)->next;
+        }
+    }
+
+    free(node);
+
+    return value;
+}
+
+int list_pop_front(node_t **head)
+{
+    return _list_erase_node_addr(head, *head);
+}
+
+int list_pop_back(node_t **head)
+{
+    return _list_erase_node_addr(head, (*head)->prev);
+}
+
+int list_erase(node_t **head, int index)
+{
+    node_t *tmp = *head;
+    int i = 0;
+    do {
+        if (tmp == NULL) {
+            exit(EXIT_FAILURE);
+        }
+        if (i == index) {
+            return _list_erase_node_addr(head, tmp);
+        }
+        tmp = tmp->next;
+        i++;
+    } while ((tmp != *head));
+    exit(EXIT_FAILURE);
+    return -1;
+}
+
 void list_destroy(node_t *head)
 {
     node_t *list_head = head;

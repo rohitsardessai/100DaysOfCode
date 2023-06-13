@@ -48,18 +48,37 @@ void print_list_reverse(node_t *list)
 
 int main()
 {
-    node_t *head = list_init(10);
+    node_t *head = list_init(2);
 
     print_list(head);
 
-    list_push_front(&head, 20);
+    list_push_front(&head, 1);
 
-    list_push_back(&head, 4);
-    list_push_back(&head, 5);
-    list_push_back(&head, 6);
+    for (int i = 3; i < 11; i++) {
+        list_push_back(&head, i);
+    }
 
     print_list(head);
     print_list_reverse(head);
+
+    printf("List size: %i\n", list_size(head));
+
+    printf("\nWhich index do you want to check?\n");
+    int index = 3;
+    // scanf("%d", &index);
+    printf("Value at index %i is %i\n", index, list_value_at(head, index));
+
+    printf("\nWhich index do you want to erase?\n");
+    scanf("%d", &index);
+
+    list_erase(&head, index);
+
+    list_pop_front(&head);
+    list_pop_back(&head);
+
+    print_list(head);
+    print_list_reverse(head);
+    printf("List size: %i\n", list_size(head));
 
     list_destroy(head);
     return 0;
