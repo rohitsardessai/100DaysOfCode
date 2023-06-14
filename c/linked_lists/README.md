@@ -14,7 +14,7 @@ A linked list is a data structure that can store data like an array but provides
  
 ## Implementation
 
-A vector can be implemented using a struct that keeps track of:
+A linked list can be implemented using a struct that keeps track of:
 * `data` - Value of the element in that node
 * `next` - Pointer to the next node
 ```
