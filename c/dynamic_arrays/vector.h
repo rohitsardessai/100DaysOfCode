@@ -84,7 +84,7 @@ void vector_resize_check(vector_t *vector, int required_capacity);
 int vector_size(vector_t *vector);
 
 /**
- * @brief Cheks if the array is empty
+ * @brief Checks if the array is empty
  *
  * @param vector Pointer to the vector data structure.
  * @return True if the array is empty
