@@ -14,17 +14,28 @@ void swap(int *a, int *b);
 void destroy_array(array_t *arr);
 void print_array(int *arr, int arr_len);
 double sort_using(void (*algorithm)(int *, int), int *arr, int arr_len);
+void merge_sort(int *arr, int arr_len);
+void merge(int *main_arr, int *arr1, int arr1_len, int *arr2, int arr2_len);
 
 int main()
 {
+    printf("Enter the size of the array\n");
+    int arr_size;
+    scanf("%d", &arr_size);
+    if (arr_size < 1) {
+        printf("Array size cannot be less than 1.\n");
+        return 0;
+    }
+
     array_t *arr = NULL;
-    arr = create_random_array(50);
+    arr = create_random_array(arr_size);
 
     printf("\nUn-sorted array:\n");
     print_array(arr->array, arr->length);
     printf("\n");
 
-    double cpu_time_used = sort_using(bubble_sort, arr->array, arr->length);
+    // double cpu_time_used = sort_using(bubble_sort, arr->array, arr->length);
+    double cpu_time_used = sort_using(merge_sort, arr->array, arr->length);
 
     printf("\nSorted array:\n");
     print_array(arr->array, arr->length);
@@ -97,9 +108,11 @@ array_t *create_random_array(int arr_len)
         exit(EXIT_FAILURE);
     }
 
+    srand(time(NULL));
+
     new_array->length = arr_len;
 
-    int random_no_range = 2 * arr_len;
+    int random_no_range = (2 * arr_len) + 20;
     for (int i = 0; i < arr_len; i++) {
         new_array->array[i] = rand() % random_no_range;
     }
@@ -124,4 +137,62 @@ void print_array(int *arr, int arr_len)
         printf("%i ", arr[i]);
     }
     printf("\n");
+}
+
+void merge_sort(int *arr, int arr_len)
+{
+    if (arr_len < 2) {
+        return;
+    }
+
+    int pivot_point = arr_len / 2;
+
+    int arr_left_len = pivot_point;
+    int arr_right_len = arr_len - pivot_point;
+
+    int arr_left[arr_left_len];
+    int arr_right[arr_right_len];
+
+    for (int i = 0; i < arr_left_len; i++) {
+        arr_left[i] = arr[i];
+    }
+
+    for (int i = pivot_point; i < arr_len; i++) {
+        arr_right[i - pivot_point] = arr[i];
+    }
+
+    merge_sort(arr_left, arr_left_len);
+    merge_sort(arr_right, arr_right_len);
+
+    merge(arr, arr_left, arr_left_len, arr_right, arr_right_len);
+}
+
+void merge(int *main_arr, int *left, int left_len, int *right, int right_len)
+{
+    int index_main = 0;
+    int index_left = 0;
+    int index_right = 0;
+
+    while (index_left < left_len && index_right < right_len) {
+        if (left[index_left] <= right[index_right]) {
+            main_arr[index_main] = left[index_left];
+            index_left++;
+        } else {
+            main_arr[index_main] = right[index_right];
+            index_right++;
+        }
+        index_main++;
+    }
+
+    while (index_left < left_len) {
+        main_arr[index_main] = left[index_left];
+        index_left++;
+        index_main++;
+    }
+
+    while (index_right < right_len) {
+        main_arr[index_main] = right[index_right];
+        index_right++;
+        index_main++;
+    }
 }
