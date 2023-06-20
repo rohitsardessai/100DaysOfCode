@@ -12,6 +12,10 @@ void destroy_array(array_t *arr);
 void print_array(int *arr, int arr_len);
 int search_using(int (*algorithm)(int *, int, int), int *arr, int arr_len, int no_to_find);
 int linear_search(int *arr, int arr_len, int no_to_find);
+void merge_sort(int *arr, int arr_len);
+void merge(int *main_arr, int *arr1, int arr1_len, int *arr2, int arr2_len);
+int binary_search(int *arr, int arr_len, int no_to_find);
+int _binary_search(int *arr, int low, int high, int no_to_find);
 
 int main()
 {
@@ -26,6 +30,8 @@ int main()
     array_t *arr = NULL;
     arr = create_random_array(arr_size);
 
+    merge_sort(arr->array, arr->length);
+
     printf("\nArray:\n");
     print_array(arr->array, arr->length);
     printf("\n");
@@ -34,7 +40,7 @@ int main()
     int no_to_find;
     scanf("%d", &no_to_find);
 
-    int index = search_using(linear_search, arr->array, arr->length, no_to_find);
+    int index = search_using(binary_search, arr->array, arr->length, no_to_find);
 
     if (index < 0) {
         printf("The number does not exist in the array.\n");
@@ -42,6 +48,8 @@ int main()
         printf("Found at index %i.\n", index);
     }
     printf("\n");
+
+    destroy_array(arr);
 
     return 0;
 }
@@ -132,4 +140,95 @@ void print_array(int *arr, int arr_len)
         printf("%i ", arr[i]);
     }
     printf("\n");
+}
+
+void merge_sort(int *arr, int arr_len)
+{
+    if (arr_len < 2) {
+        return;
+    }
+
+    int pivot_point = arr_len / 2;
+
+    int arr_left_len = pivot_point;
+    int arr_right_len = arr_len - pivot_point;
+
+    int arr_left[arr_left_len];
+    int arr_right[arr_right_len];
+
+    for (int i = 0; i < arr_left_len; i++) {
+        arr_left[i] = arr[i];
+    }
+
+    for (int i = pivot_point; i < arr_len; i++) {
+        arr_right[i - pivot_point] = arr[i];
+    }
+
+    merge_sort(arr_left, arr_left_len);
+    merge_sort(arr_right, arr_right_len);
+
+    merge(arr, arr_left, arr_left_len, arr_right, arr_right_len);
+}
+
+void merge(int *main_arr, int *left, int left_len, int *right, int right_len)
+{
+    int index_main = 0;
+    int index_left = 0;
+    int index_right = 0;
+
+    while (index_left < left_len && index_right < right_len) {
+        if (left[index_left] <= right[index_right]) {
+            main_arr[index_main] = left[index_left];
+            index_left++;
+        } else {
+            main_arr[index_main] = right[index_right];
+            index_right++;
+        }
+        index_main++;
+    }
+
+    while (index_left < left_len) {
+        main_arr[index_main] = left[index_left];
+        index_left++;
+        index_main++;
+    }
+
+    while (index_right < right_len) {
+        main_arr[index_main] = right[index_right];
+        index_right++;
+        index_main++;
+    }
+}
+
+/**
+ * @brief Perform binary search
+ *
+ * @param arr Pointer to array
+ * @param arr_len Length of the array
+ * @param no_to_find The number to search for
+ * @return Returns the index of the first occurrence of the number. Returns -1 if not found
+ */
+int binary_search(int *arr, int arr_len, int no_to_find)
+{
+    return _binary_search(arr, 0, (arr_len - 1), no_to_find);
+}
+
+int _binary_search(int *arr, int low, int high, int no_to_find)
+{
+    if (low > high) {
+        return -1;
+    }
+
+    int mid_point = (low + high) / 2;
+
+    if (arr[mid_point] == no_to_find) {
+        return mid_point;
+    }
+    if (arr[mid_point] < no_to_find) {
+        return _binary_search(arr, (mid_point + 1), high, no_to_find);
+    } else {
+        return _binary_search(arr, low, (mid_point - 1), no_to_find);
+    }
+
+    return -1;
 }
