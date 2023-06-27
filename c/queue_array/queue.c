@@ -25,6 +25,35 @@ queue_t *queue_create(int queue_size)
     return new_queue;
 }
 
+int available_len(queue_t *queue)
+{
+    int no_of_elements = (queue->write_index - queue->read_index + queue->size) % queue->size;
+    int _available_len = queue->size - no_of_elements - 1;
+    return _available_len;
+}
+
+int enqueue(queue_t *queue, int value)
+{
+    if (full(queue)) {
+        return -1;
+    }
+    queue->data[queue->write_index] = value;
+    queue->write_index = (queue->write_index + 1) % queue->size;
+
+    return 0;
+}
+
+int dequeue(queue_t *queue)
+{
+    if (empty(queue)) {
+        exit(EXIT_FAILURE);
+    }
+    int value = queue->data[queue->read_index];
+    queue->read_index = (queue->read_index + 1) % queue->size;
+
+    return value;
+}
+
 bool empty(queue_t *queue)
 {
     return (queue->write_index == queue->read_index);
@@ -32,9 +61,8 @@ bool empty(queue_t *queue)
 
 bool full(queue_t *queue)
 {
-    int no_of_elements = (queue->read_index - queue->write_index + queue->size) % queue->size;
-    int available_len = queue->size - no_of_elements - 1;
-    if (available_len > 0) {
+    int free_slots = available_len(queue);
+    if (free_slots > 0) {
         return false;
     }
     return true;
