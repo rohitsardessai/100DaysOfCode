@@ -14,7 +14,13 @@ typedef struct {
     int read_index;
 } queue_t;
 
-queue_t *new_queue(int size);
+/**
+ * @brief Creates a new queue of the specificed size
+ *
+ * @param size Size of the queue
+ * @return Returns a poiter to the new queue
+ */
+queue_t *queue_create(int size);
 
 void destroy_queue(queue_t *queue);
 

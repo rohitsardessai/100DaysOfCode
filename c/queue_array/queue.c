@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-queue_t *new_queue(int queue_size)
+queue_t *queue_create(int queue_size)
 {
     if (queue_size < 1) {
         return NULL;
@@ -13,14 +13,14 @@ queue_t *new_queue(int queue_size)
         printf("Failed to alocate memory");
         exit(EXIT_FAILURE);
     }
-    new_queue->data = malloc(sizeof(int) * queue_size);
+    new_queue->data = malloc((sizeof(int) * queue_size) + 1); // 1 space is always left empty to determine if queue is full or empty
     if (new_queue->data == NULL) {
         printf("Failed to alocate memory");
         exit(EXIT_FAILURE);
     }
     new_queue->write_index = 0;
     new_queue->read_index = 0;
-    new_queue->size = queue_size;
+    new_queue->size = queue_size + 1;
 
     return new_queue;
 }
