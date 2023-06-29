@@ -28,6 +28,7 @@ node_t *list_init(int value)
 {
     node_t *n = new_node();
     n->value = value;
+    return n;
 }
 
 void list_push_front(node_t **head, int value)
@@ -102,7 +103,7 @@ int _list_erase_node_addr(node_t **head, node_t *node)
 
     if (node == *head) {
         if ((*head)->next == *head) {
-            *head == NULL;
+            *head = NULL;
         } else {
             *head = (*head)->next;
         }
