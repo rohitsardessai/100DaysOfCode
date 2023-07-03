@@ -16,6 +16,9 @@ void print_array(int *arr, int arr_len);
 double sort_using(void (*algorithm)(int *, int), int *arr, int arr_len);
 void merge_sort(int *arr, int arr_len);
 void merge(int *main_arr, int *arr1, int arr1_len, int *arr2, int arr2_len);
+void quick_sort(int *arr, int arr_len);
+void _quick_sort(int *arr, int left_index, int right_index);
+int partition(int *arr, int left_index, int right_index);
 
 int main()
 {
@@ -35,7 +38,7 @@ int main()
     printf("\n");
 
     // double cpu_time_used = sort_using(bubble_sort, arr->array, arr->length);
-    double cpu_time_used = sort_using(merge_sort, arr->array, arr->length);
+    double cpu_time_used = sort_using(quick_sort, arr->array, arr->length);
 
     printf("\nSorted array:\n");
     print_array(arr->array, arr->length);
@@ -195,4 +198,33 @@ void merge(int *main_arr, int *left, int left_len, int *right, int right_len)
         index_right++;
         index_main++;
     }
+}
+
+int partition(int *arr, int left_index, int right_index)
+{
+    int pivot_point = arr[right_index];
+    int index_of_smallest_element = left_index - 1;
+
+    for (int i = left_index; i <= right_index - 1; i++) {
+        if (arr[i] < pivot_point) {
+            index_of_smallest_element++;
+            swap(&arr[i], &arr[index_of_smallest_element]);
+        }
+    }
+    swap(&arr[right_index], &arr[index_of_smallest_element + 1]);
+    return index_of_smallest_element + 1;
+}
+
+void _quick_sort(int *arr, int left_index, int right_index)
+{
+    if (left_index < right_index) {
+        int pivot_index = partition(arr, left_index, right_index);
+        _quick_sort(arr, left_index, pivot_index - 1);
+        _quick_sort(arr, pivot_index + 1, right_index);
+    }
+}
+
+void quick_sort(int *arr, int arr_len)
+{
+    _quick_sort(arr, 0, arr_len - 1);
 }
