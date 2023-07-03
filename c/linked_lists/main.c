@@ -44,6 +44,10 @@ int main()
     list_erase(&list, 0);
     print_list(list);
 
+    list_reverse(&list);
+    printf("Reversing: ");
+    print_list(list);
+
     printf("Which index would you like to check?\n");
     int index_to_check = 0;
     scanf("%i", &index_to_check);

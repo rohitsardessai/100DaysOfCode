@@ -82,6 +82,13 @@ void list_insert(node_t **head, int index, int value);
 void list_erase(node_t **head, int index);
 
 /**
+ * @brief Reverses the linked list. Points head to the last element and changed the next pointer of each node to point to the previous node.
+ *
+ * @param head
+ */
+void list_reverse(node_t **head);
+
+/**
  * @brief Frees the memory used by the linked list
  *
  * @param list Pointer to the linked list head

@@ -131,6 +131,21 @@ void list_erase(node_t **head, int index)
     }
 }
 
+void list_reverse(node_t **head)
+{
+    node_t *previous_node = NULL;
+    node_t *current_node = *head;
+    node_t *next_node = NULL;
+
+    while (current_node != NULL) {
+        next_node = current_node->next;
+        current_node->next = previous_node;
+        previous_node = current_node;
+        current_node = next_node;
+    }
+    *head = previous_node;
+}
+
 void list_destroy(node_t *list)
 {
     while (list != NULL) {
