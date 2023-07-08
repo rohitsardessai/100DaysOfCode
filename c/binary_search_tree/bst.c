@@ -43,6 +43,66 @@ bst_node_t *insert(bst_node_t *node, int data)
     return node;
 }
 
+int get_node_count(bst_node_t *root)
+{
+
+    if (root == NULL) {
+        return 0;
+    }
+
+    int count = 1;
+
+    count += get_node_count(root->left_node);
+    count += get_node_count(root->right_node);
+
+    return count;
+}
+
+bool is_in_tree(bst_node_t *node, int value)
+{
+    if (node == NULL) {
+        return false;
+    }
+
+    if (node->data == value) {
+        return true;
+    } else if (node->data > value) {
+        return is_in_tree(node->left_node, value);
+    } else {
+        return is_in_tree(node->right_node, value);
+    }
+}
+
+int get_min(bst_node_t *node)
+{
+    if (node == NULL) {
+        return 0;
+    }
+
+    bst_node_t *tmp = node;
+
+    while (tmp->left_node != NULL) {
+        tmp = tmp->left_node;
+    }
+
+    return tmp->data;
+}
+
+int get_max(bst_node_t *node)
+{
+    if (node == NULL) {
+        return 0;
+    }
+
+    bst_node_t *tmp = node;
+
+    while (tmp->right_node != NULL) {
+        tmp = tmp->right_node;
+    }
+
+    return tmp->data;
+}
+
 void destroy_tree(bst_node_t *root)
 {
     if (root == NULL) {

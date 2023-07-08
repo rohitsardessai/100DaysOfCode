@@ -12,6 +12,8 @@
 #ifndef BST_H
 #define BST_H
 
+#include <stdbool.h>
+
 typedef struct bst_node {
     int data;
     struct bst_node *left_node;
@@ -34,6 +36,40 @@ bst_node_t *create_node(int data);
  * @return Returns a pointer to the root of the tree
  */
 bst_node_t *insert(bst_node_t *root, int data);
+
+/**
+ * @brief Count the  umber of nodes in the tree
+ *
+ * @param root Pointer to the root of the tree
+ * @return Returns the number of nodes in the tree
+ */
+int get_node_count(bst_node_t *root);
+
+/**
+ * @brief Check if the given value is present in the tree
+ *
+ * @param node Pointer to the root of the tree
+ * @param value Value to find
+ * @return true Returns true if the value is present in the tree
+ * @return false Returns false if the value is not present in the tree
+ */
+bool is_in_tree(bst_node_t *node, int value);
+
+/**
+ * @brief Get the minimum value present in the tree
+ *
+ * @param node Pointer to the root of the tree
+ * @return Returns the minimum value present in the tree
+ */
+int get_min(bst_node_t *node);
+
+/**
+ * @brief Get the maximum value present in the tree
+ *
+ * @param node Pointer to the root of the tree
+ * @return Returns the maximum value present in the tree
+ */
+int get_max(bst_node_t *node);
 
 /**
  * @brief Deletes the tree and frees up all the alocated memory
