@@ -103,6 +103,35 @@ int get_max(bst_node_t *node)
     return tmp->data;
 }
 
+bool is_binary_search_tree(bst_node_t *node)
+{
+    if (node == NULL) {
+        return true;
+    }
+
+    if (node->left_node != NULL) {
+        if (node->left_node->data > node->data) {
+            return false;
+        }
+    }
+
+    if (node->right_node != NULL) {
+        if (node->right_node->data < node->data) {
+            return false;
+        }
+    }
+
+    if (is_binary_search_tree(node->left_node) == false) {
+        return false;
+    }
+
+    if (is_binary_search_tree(node->right_node) == false) {
+        return false;
+    }
+
+    return true;
+}
+
 void destroy_tree(bst_node_t *root)
 {
     if (root == NULL) {

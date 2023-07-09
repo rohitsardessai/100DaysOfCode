@@ -72,6 +72,15 @@ int get_min(bst_node_t *node);
 int get_max(bst_node_t *node);
 
 /**
+ * @brief Checks if the given tree is a valid binary search tree. The node that is passes is considered the root of the tree.
+ *
+ * @param node Pointer to the root of the tree
+ * @return true Returns true if the given tree is a valid binary search tree
+ * @return false Returns false if the given tree is not a valid binary search tree
+ */
+bool is_binary_search_tree(bst_node_t *node);
+
+/**
  * @brief Deletes the tree and frees up all the alocated memory
  *
  * @param root Pointer to the root of the tree
