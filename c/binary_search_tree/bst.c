@@ -132,6 +132,38 @@ bool is_binary_search_tree(bst_node_t *node)
     return true;
 }
 
+bst_node_t *delete_value(bst_node_t *node, int value)
+{
+    if (node == NULL) {
+        return NULL;
+    }
+
+    if (value < node->data) {
+        node->left_node = delete_value(node->left_node, value);
+    } else if (value > node->data) {
+        node->right_node = delete_value(node->right_node, value);
+    } else {
+        if (node->left_node == NULL && node->right_node == NULL) {
+            free(node);
+            return NULL;
+        } else if (node->left_node == NULL) {
+            bst_node_t *tmp = node->right_node;
+            free(node);
+            return tmp;
+        } else if (node->right_node == NULL) {
+            bst_node_t *tmp = node->left_node;
+            free(node);
+            return tmp;
+        } else {
+            int right_min = get_min(node->right_node);
+
+            node->data = right_min;
+            node->right_node = delete_value(node->right_node, right_min);
+        }
+    }
+    return node;
+}
+
 void destroy_tree(bst_node_t *root)
 {
     if (root == NULL) {

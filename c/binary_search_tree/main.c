@@ -37,6 +37,13 @@ int main()
     scanf("%d", &val);
     printf("Is present: %i\n", is_in_tree(root, val));
 
+    printf("Deleting %i\n", val);
+    delete_value(root, val);
+
+    printf("\nPrinting tree:\n");
+    inorder_traversal(root);
+    printf("\n\n");
+
     printf("Is BST: %i\n", is_binary_search_tree(root));
 
     test_bst_validity();

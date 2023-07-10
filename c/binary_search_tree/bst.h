@@ -81,6 +81,15 @@ int get_max(bst_node_t *node);
 bool is_binary_search_tree(bst_node_t *node);
 
 /**
+ * @brief Deletes the specified value from the binary search tree
+ *
+ * @param node Pointer to the root of the tree
+ * @param value Value to be deleted
+ * @return Returns a pointer to the last node
+ */
+bst_node_t *delete_value(bst_node_t *node, int value);
+
+/**
  * @brief Deletes the tree and frees up all the alocated memory
  *
  * @param root Pointer to the root of the tree
