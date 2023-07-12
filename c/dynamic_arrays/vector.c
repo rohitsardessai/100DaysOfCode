@@ -64,18 +64,18 @@ void vector_resize_check(vector_t *vector, int required_capacity)
 {
     if (required_capacity > vector->capacity) {
 
-        int new_capacity = vector->capacity * sizeof(int) * 2;
-        vector->data = realloc(vector->data, new_capacity);
+        int new_capacity = vector->capacity * 2;
+        vector->data = realloc(vector->data, (new_capacity * sizeof(int)));
         vector->capacity = new_capacity;
 
     } else if (required_capacity < (vector->capacity / 4)) {
 
-        int new_capacity = vector->capacity * sizeof(int) / 2;
+        int new_capacity = vector->capacity / 2;
         if (new_capacity < 1) {
             return;
         }
 
-        vector->data = realloc(vector->data, new_capacity);
+        vector->data = realloc(vector->data, (new_capacity * sizeof(int)));
         vector->capacity = new_capacity;
     }
 }
