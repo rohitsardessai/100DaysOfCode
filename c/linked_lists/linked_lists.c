@@ -80,15 +80,20 @@ int list_size(node_t **head)
 
 void list_insert(node_t **head, int index, int value)
 {
+    if (index == 0) {
+        list_push_front(head, value);
+        return;
+    }
+
     node_t *n = new_node();
     n->data = value;
 
     node_t *tmp = *head;
 
-    if (index == 0) {
-        list_push_front(head, value);
-        return;
-    }
+    // if (index == 0) {
+    //     list_push_front(head, value);
+    //     return;
+    // }
 
     for (int i = 0; i <= index; i++) {
         if (i == index - 1) {
@@ -110,6 +115,7 @@ void list_erase(node_t **head, int index)
 
     if (index == 0) {
         *head = tmp->next;
+        free(tmp);
         return;
     }
 
@@ -122,7 +128,7 @@ void list_erase(node_t **head, int index)
             if (tmp->next->next != NULL) {
                 tmp->next = tmp->next->next;
             } else {
-                tmp->next == NULL;
+                tmp->next = NULL;
             }
             free(node_to_delete);
             break;
