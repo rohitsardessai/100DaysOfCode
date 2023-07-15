@@ -27,7 +27,7 @@ void printBits(size_t const size, void const *const ptr)
             printf("%u", byte);
         }
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 int main(void)
@@ -39,11 +39,21 @@ int main(void)
 
     u_num |= (1 << 2); // set 3rd bit
     printBits(sizeof(uint8_t), &u_num);
-    printf("Value of 3rd bit is %i\n", ((u_num >> 2) & 1));
+    printf("Set of 3rd bit is %i\n", ((u_num >> 2) & 1));
+
+    u_num ^= (1 << 2); // toggle 3rd bit
+    printBits(sizeof(uint8_t), &u_num);
+    printf("Toggled of 3rd bit is %i\n", ((u_num >> 2) & 1));
+
+    u_num ^= (1 << 2); // toggle 3rd bit
+    printBits(sizeof(uint8_t), &u_num);
+    printf("Toggled of 3rd bit is %i\n", ((u_num >> 2) & 1));
 
     u_num &= ~(1 << 2); // reset 3rd bit
     printBits(sizeof(uint8_t), &u_num);
-    printf("Value of 3rd bit is %i\n", ((u_num >> 2) & 1));
+    printf("Reset of 3rd bit is %i\n", ((u_num >> 2) & 1));
+
+
 
     return 0;
 }
