@@ -10,8 +10,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void simple_method(int *arr, int arr_len);
+void better_method(int *arr, int arr_len);
 
 void main()
 {
@@ -19,7 +21,7 @@ void main()
 
     int arr_len = sizeof(arr) / sizeof(arr[0]);
 
-    simple_method(arr, arr_len);
+    better_method(arr, arr_len);
 }
 
 /**
@@ -45,4 +47,35 @@ void simple_method(int *arr, int arr_len)
     here:
     }
     printf("\n\n");
+}
+
+/**
+ * @brief Counts the number of pairs in O(n) time but uses more space. Suitable if the max value in the array is small.
+ * 
+ * @param arr
+ * @param arr_len 
+ */
+void better_method(int *arr, int arr_len)
+{
+    int max = arr[0];
+    for (int i = 1; i < arr_len; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    int *freq = calloc((max + 1), sizeof(int));
+
+    for (int i = 0; i < arr_len; i++) {
+        freq[arr[i]]++;
+    }
+
+    for (int i = 0; i <= max; i++) {
+        if (freq[i] > 1) {
+            int pairs = freq[i] / 2;
+            printf("%i has %i pairs\n", i, pairs);
+        }
+    }
+
+    free(freq);
 }
