@@ -4,6 +4,8 @@
 void print_result(bool result);
 void test_bst_validity();
 void inorder_traversal(bst_node_t *root);
+void preorder_traversal(bst_node_t *root);
+void postorder_traversal(bst_node_t *root);
 
 int main()
 {
@@ -44,6 +46,14 @@ int main()
     inorder_traversal(root);
     printf("\n\n");
 
+    printf("\nPre-order traversal:\n");
+    preorder_traversal(root);
+    printf("\n\n");
+
+    printf("\nPost-order traversal:\n");
+    postorder_traversal(root);
+    printf("\n\n");
+
     printf("Is BST: %i\n", is_binary_search_tree(root));
 
     test_bst_validity();
@@ -63,6 +73,28 @@ void inorder_traversal(bst_node_t *root)
     inorder_traversal(root->left_node);
     printf("%i ", root->data);
     inorder_traversal(root->right_node);
+}
+
+void preorder_traversal(bst_node_t *root)
+{
+    if (root == NULL) {
+        return;
+    }
+
+    printf("%i ", root->data);
+    preorder_traversal(root->left_node);
+    preorder_traversal(root->right_node);
+}
+
+void postorder_traversal(bst_node_t *root)
+{
+    if (root == NULL) {
+        return;
+    }
+
+    postorder_traversal(root->left_node);
+    postorder_traversal(root->right_node);
+    printf("%i ", root->data);
 }
 
 void print_result(bool result)
