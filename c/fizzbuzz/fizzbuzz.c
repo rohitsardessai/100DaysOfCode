@@ -19,6 +19,7 @@
 
 void print_fizzbuzz(int no_of_digits);
 char *get_fizzbuzz_output_string(int no_of_elements, int *output_len);
+char *better_fizzbuzz_output_string(int no_of_digits, int *output_len);
 
 int main()
 {
@@ -29,7 +30,8 @@ int main()
 
     char *output;
     int output_len;
-    output = get_fizzbuzz_output_string(no_of_elements, &output_len);
+    // output = get_fizzbuzz_output_string(no_of_elements, &output_len);
+    output = better_fizzbuzz_output_string(no_of_elements, &output_len);
 
     int len = strlen(output);
     printf("\nlen: %i\n", len);
@@ -95,6 +97,33 @@ char *get_fizzbuzz_output_string(int no_of_digits, int *output_len)
             sprintf(str, "%d ", i);
             strcat(output, str);
         }
+    }
+
+    *output_len = strlen(output);
+
+    return output;
+}
+
+char *better_fizzbuzz_output_string(int no_of_digits, int *output_len)
+{
+    char *output;
+    output = malloc(sizeof(char) * 5 * no_of_digits);
+
+    output[0] = '\0';
+
+    for (int i = 1; i <= no_of_digits; i++) {
+        char tmp[9] = "";
+        if (i % 3 == 0) {
+            strcat(tmp, "Fizz");
+        }
+        if (i % 5 == 0) {
+            strcat(tmp, "Buzz");
+        }
+        if (strlen(tmp) == 0) {
+            snprintf(tmp, sizeof(tmp), "%d", i);
+        }
+        strcat(output, tmp);
+        strcat(output, " ");
     }
 
     *output_len = strlen(output);
