@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <unordered_set>
 using namespace std;
 
 int getFactorial(int number)
@@ -63,8 +65,36 @@ bool checkPalindrome(int num)
     return originalNum == reversedNum;
 }
 
+bool checkAnagram(std::string str1, std::string str2)
+{
+    std::unordered_set<char> str1_set;
+
+    for (int i = 0; i < str1.length(); i++) {
+        str1_set.insert(str1[i]);
+    }
+
+    for (int i = 0; i < str2.length(); i++) {
+        if (str1_set.find(str2[i]) == str1_set.end()) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main()
 {
+    std::string str1, str2;
+    std::cout << "Enter the first string: ";
+    std::getline(std::cin, str1);
+    std::cout << "Enter the second string: ";
+    std::getline(std::cin, str2);
+
+    if (checkAnagram(str1, str2)) {
+        std::cout << "The strings are anagrams." << std::endl;
+    } else {
+        std::cout << "The strings are not anagrams." << std::endl;
+    }
+
     long number = 115352413215123;
     int i = 3;
 
