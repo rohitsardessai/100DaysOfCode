@@ -34,7 +34,7 @@ hash_table_t *ht_new();
 static ht_item_t *ht_new_item(const char *k, const char *v);
 
 /**
- * @brief Delets an items and frees the memory used
+ * @brief Deletes an items and frees the memory used
  *
  * @param item Pointer to the item to be deleted
  */
