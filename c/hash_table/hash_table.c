@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+static ht_item_t HT_DELETED_ITEM = {NULL, NULL};
+
 hash_table_t *ht_new()
 {
     hash_table_t *ht = malloc(sizeof(hash_table_t));

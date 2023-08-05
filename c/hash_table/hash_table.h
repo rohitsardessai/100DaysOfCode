@@ -22,8 +22,6 @@ typedef struct {
     ht_item_t **items;
 } hash_table_t;
 
-static ht_item_t HT_DELETED_ITEM = {NULL, NULL};
-
 /**
  * @brief Create a new empty hash table
  *
