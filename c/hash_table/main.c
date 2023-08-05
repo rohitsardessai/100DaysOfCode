@@ -15,6 +15,7 @@ int main()
     }
 
     ht_insert(my_ht, "dog", "bark");
+    ht_insert(my_ht, "dog", "mews");
     ht_delete(my_ht, "dog");
     value = NULL;
     value = ht_search(my_ht, "dog");

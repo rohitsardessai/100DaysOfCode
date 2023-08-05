@@ -98,6 +98,11 @@ void ht_insert(hash_table_t *ht, const char *key, const char *value)
     int index = ht_get_hash(item->key, ht->size, 0);
     int attempt = 1;
     while (ht->items[index] != NULL && ht->items[index] != &HT_DELETED_ITEM) {
+        if (strcmp(ht->items[index]->key, key) == 0) {
+            ht_del_item(ht->items[index]);
+            ht->count--;
+            break;
+        }
         index = ht_get_hash(item->key, ht->size, attempt);
         attempt++;
         if (attempt > ht->size) {
