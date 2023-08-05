@@ -4,7 +4,7 @@
 
 hash_table_t *ht_new()
 {
-    hash_table_t *ht = malloc(sizeof(hash_table_t));
+    hash_table_t *ht = malloc(sizeof(hash_table_t *));
     if (ht == NULL) {
         return NULL;
     }
