@@ -5,14 +5,14 @@
 
 hash_table_t *ht_new()
 {
-    hash_table_t *ht = malloc(sizeof(hash_table_t *));
+    hash_table_t *ht = malloc(sizeof(hash_table_t));
     if (ht == NULL) {
         return NULL;
     }
 
     ht->size = 53; // fixed size for now
     ht->count = 0;
-    ht->items = calloc((size_t)ht->size, sizeof(ht_item_t)); // fills the allocated memory with NULL bytes
+    ht->items = calloc((size_t)ht->size, sizeof(ht_item_t *)); // fills the allocated memory with NULL bytes
 
     return ht;
 }
