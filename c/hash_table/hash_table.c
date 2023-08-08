@@ -1,4 +1,5 @@
 #include "hash_table.h"
+#include "prime.h"
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
