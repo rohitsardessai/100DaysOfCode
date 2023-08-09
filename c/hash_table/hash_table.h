@@ -8,6 +8,8 @@ This is a reimplementation of hash tables originally made by jamesroutley on Git
 
 #include <stddef.h>
 
+#define HT_INITIAL_BASE_SIZE 53
+
 #define HT_PRIME_1 151
 #define HT_PRIME_2 173
 
@@ -17,6 +19,7 @@ typedef struct {
 } ht_item_t;
 
 typedef struct {
+    int base_size;
     int size;
     int count;
     ht_item_t **items;
@@ -28,6 +31,14 @@ typedef struct {
  * @return hash_table_t*
  */
 hash_table_t *ht_new();
+
+/**
+ * @brief Create a new empty hash table of the given size
+ *
+ * @param base_size The base size of the hash table
+ * @return Returns a pointer to the hash created table struct
+ */
+static hash_table_t *ht_new_sized(const int base_size);
 
 /**
  * @brief Create a new hash table item (key value pair)

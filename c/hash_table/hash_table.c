@@ -8,12 +8,18 @@ static ht_item_t HT_DELETED_ITEM = {NULL, NULL};
 
 hash_table_t *ht_new()
 {
+    return ht_new_sized(HT_INITIAL_BASE_SIZE);
+}
+
+static hash_table_t *ht_new_sized(const int base_size)
+{
     hash_table_t *ht = malloc(sizeof(hash_table_t));
     if (ht == NULL) {
         return NULL;
     }
 
-    ht->size = 53; // fixed size for now
+    ht->base_size = base_size;
+    ht->size = next_prime(ht->base_size);
     ht->count = 0;
     ht->items = calloc((size_t)ht->size, sizeof(ht_item_t *)); // fills the allocated memory with NULL bytes
 
